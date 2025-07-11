@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <style>
+            .idi{
+                z-index: 1000;
+                display: none;
+                left:0;
+                top:0;
+                width:100%;
+                height:100%;
+                position: fixed;
+                justify-content: center;
+                background-color: rgba(0,0,0,0.5);
+            }
+            .idli{
+            border:5px solid green;
+            background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                width: 80%;
+                max-width: 400px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                text-align: center;
+                text-decoration-color: green;
+            }
+        
+            #demo{
+                display:none;
+            }
+            h2{
+                margin-left:30%;
+            }
+            form{
+                margin-left:1%;
+            }
+            .mouse{
+                cursor:pointer;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h2>DSA QUESTIONS ON TIME COMPLEXITY</h2>
+        <div id="demo" class="idi">
+        <div class="idli" id="modalContent" ></div></div>
+        <form onsubmit="return false">
+        <label for="q1">What is time Compexity of merge Sort?</label><br>
+      <input   type ="radio" name="q1" id="otpion1" value="n^2">
+      <label for="otpion1" class="mouse">n^2</label><br>
+      <input type ="radio" name="q1" id="otpion2" value="nlogn">
+      <label for="otpion2" class="mouse">n logn</label><br>
+      <input type ="radio" name="q1" id="otpion3" value="n">
+      <label for="otpion3" class="mouse">n</label><br>
+      <input type ="radio" name="q1" id="otpion4" value="loglogn">
+      <label for="otpion4" class="mouse">loglogn</label><br><br>
+      <button onclick="functionq()" id="button1">Check</button>
+
+<br><br>
+       <label for="q2">What is time Compexity of quickSort?</label><br>
+      <input type ="radio" name="q2" id="q2otpion1" value="n^2">
+      <label for="q2otpion1" class="mouse">n^2</label><br>
+      <input type ="radio" name="q2" id="q2otpion2" value="nlogn">
+      <label for="q2otpion2" class="mouse">n logn</label><br>
+      <input type ="radio" name="q2" id="q2otpion3" value="n">
+      <label for="q2otpion3" class="mouse">n</label><br>
+      <input type ="radio" name="q2" id="q2otpion4" value="loglogn">
+      <label for="q2otpion4" class="mouse">loglogn</label><br><br>
+      <button onclick="functionq2()" id="button2">Check</button>
+<br><br>
+      <label for="q3">What is wrost time Compexity of mergeSort?</label><br>
+      <input type ="radio" name="q3" id="q3otpion1" value="n^2">
+      <label for="q3otpion1" class="mouse">n^2</label><br>
+      <input type ="radio" name="q3" id="q3otpion2" value="nlogn">
+      <label for="q3otpion2" class="mouse">n logn</label><br>
+      <input type ="radio" name="q3" id="q3otpion3" value="n">
+      <label for="q3otpion3" class="mouse">n</label><br>
+      <input type ="radio" name="q3" id="q3otpion4" value="loglogn">
+      <label for="q3otpion4" class="mouse">loglogn</label><br><br>
+      <button onclick="functionq3()" id="button3">Check</button>
+      <br><br>
+      <label for="q4">Why mergeSort have same time complexity in all the cases?</label><br>
+      <input type ="radio" name="q4" id="q4otpion1" value="It always follows divide and conquer irrespective of array order">
+      <label for="q4otpion1" class="mouse">It always follows divide and conquer irrespective of array order.</label><br>
+      <input type ="radio" name="q4" id="q4otpion2" value="It doesnt care about array size">
+      <label for="q4otpion2" class="mouse">It doesn't care about array size.</label><br>
+      <input type ="radio" name="q4" id="q4otpion3" value="It always follows backtracking irrespective of array order">
+      <label for="q4otpion3" class="mouse">It always follows backtracking irrespective of array order </label><br>
+      <input type ="radio" name="q4" id="q4otpion4" value="Both 1 and 3">
+      <label for="q4otpion4" class="mouse">Both 1 and 3</label><br><br>
+      <button onclick="functionq4()" id="button4">Check</button>
+      <br><br>
+      <label for="q5">What is the wrost time complexity of quickSort?</label><br>
+      <input type ="radio" name="q5" id="q5otpion1" value="n">
+      <label for="q5otpion1" class="mouse">n</label><br>
+      <input type ="radio" name="q5" id="q5otpion2" value="nlogn">
+      <label for="q5otpion2" class="mouse">nlogn</label><br>
+      <input type ="radio" name="q5" id="q5otpion3" value="n*n">
+      <label for="q5otpion3" class="mouse">n*n</label><br>
+      <input type ="radio" name="q5" id="q5otpion4" value="loglogn">
+      <label for="q5otpion4" class="mouse">loglogn</label><br><br>
+      <button onclick="functionq5()" id="button5">Check</button>
+      <br><br>
+       <label for="q6">What is time Compexity of Binary Search?</label><br>
+      <input type ="radio" name="q6" id="q6otpion1" value="n^2">
+      <label for="q6otpion1" class="mouse">n^2</label><br>
+      <input type ="radio" name="q6" id="q6otpion2" value="logn">
+      <label for="q6otpion2" class="mouse">logn</label><br>
+      <input type ="radio" name="q6" id="q6otpion3" value="n">
+      <label for="q6otpion3" class="mouse">n</label><br>
+      <input type ="radio" name="q6" id="q6otpion4" value="loglogn">
+      <label for="q6otpion4" class="mouse">loglogn</label><br><br>
+      <button onclick="functionq6()" id="button6">Check</button>
+       <br><br>
+       <label for="q7">What is time Compexity of Dijistra(when using min-priority queue)?</label><br>
+      <input type ="radio" name="q7" id="q7otpion1" value="O(V+E)">
+      <label for="q7otpion1" class="mouse">O(V+E)</label><br>
+      <input type ="radio" name="q7" id="q7otpion2" value="O((E+V)V)">
+      <label for="q7otpion2" class="mouse">O((E+V)V)</label><br>
+      <input type ="radio" name="q7" id="q7otpion3" value="n logn">
+      <label for="q7otpion3" class="mouse">n logn</label><br>
+      <input type ="radio" name="q7" id="q7otpion4" value="O(E log V)">
+      <label for="q7otpion4" class="mouse">O(E log V)</label><br><br>
+      <button onclick="functionq7()" id="button7">Check</button>
+       <br><br>
+       <label for="q8">What is time Compexity of Krushkal Algorithm?</label><br>
+      <input type ="radio" name="q8" id="q8otpion1" value="O(log V)">
+      <label for="q8otpion1" class="mouse">O(log V)</label><br>
+      <input type ="radio" name="q8" id="q8otpion2" value="O((E+V)V)">
+      <label for="q8otpion2" class="mouse">O((E+V)V)</label><br>
+      <input type ="radio" name="q8" id="q8otpion3" value="O(E+log V)">
+      <label for="q8otpion3" class="mouse">O(E+log V)</label><br>
+      <input type ="radio" name="q8" id="q8otpion4" value="O(E*log V)">
+      <label for="q8otpion4" class="mouse">O(E*log V)</label><br><br>
+      <button onclick="functionq8()" id="button8">Check</button>
+    
+<br><br>
+       <label for="q9">What is time Compexity of Prims Algorithm(using min-heap)?</label><br>
+      <input type ="radio" name="q9" id="q9otpion1" value="O(log V)">
+      <label for="q9otpion1" class="mouse">O(log V)</label><br>
+      <input type ="radio" name="q9" id="q9otpion2" value="O((V + E) log V)">
+      <label for="q9otpion2" class="mouse">O((V + E) log V)</label><br>
+      <input type ="radio" name="q9" id="q9otpion3" value="O(E+log V)">
+      <label for="q9otpion3" class="mouse">O(E+log V)</label><br>
+      <input type ="radio" name="q9" id="q9otpion4" value="O(E/log V)">
+      <label for="q9otpion4" class="mouse">O(E/log V)</label><br><br>
+      <button onclick="functionq9()" id="button9">Check</button>
+      <br><br>
+       <label for="q10">Which technique used in dynamic programming?</label><br>
+      <input type ="radio" name="q10" id="q10otpion1" value="Memoization and Tabulation">
+      <label for="q10otpion1" class="mouse">Memoization and Tabulation</label><br>
+      <input type ="radio" name="q10" id="q10otpion2" value="Backtracking">
+      <label for="q10otpion2" class="mouse">Backtracking</label><br>
+      <input type ="radio" name="q10" id="q10otpion3" value="Greedy Algorithm">
+      <label for="q10otpion3" class="mouse">Greedy Algorithm</label><br>
+      <input type ="radio" name="q10" id="q10otpion4" value="Divide and Conquer">
+      <label for="q10otpion4" class="mouse">Divide and Conquer</label><br><br>
+      <button onclick="functionq10()" id="button10">Check</button>
+      <br><br>
+       <label for="q11">What is the time complexity of linear search in the wrost case?</label><br>
+      <input type ="radio" name="q11" id="q11otpion1" value="logn">
+      <label for="q11otpion1" class="mouse">log n</label><br>
+      <input type ="radio" name="q11" id="q11otpion2" value="loglogn">
+      <label for="q11otpion2" class="mouse">loglogn</label><br>
+      <input type ="radio" name="q11" id="q11otpion3" value="n*n">
+      <label for="q11otpion3" class="mouse">n*n</label><br>
+      <input type ="radio" name="q11" id="q11otpion4" value="n">
+      <label for="q11otpion4" class="mouse">n</label><br><br>
+      <button onclick="functionq11()" id="button11">Check</button>
+      </form>
+    <script>
+        let value=0;
+        let incorrect=0;
+        function functionq(){
+            let modalContent=document.getElementById("modalContent");
+            let button1=document.getElementById("button1");
+            let dudo=document.getElementsByClassName("idli");
+        let answer=document.querySelector('input[name="q1"]:checked');
+        if(answer&&answer.value=="nlogn"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+            dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+            button1.style.display="none";
+
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+            dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+         function functionq2(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+        let answer=document.querySelector('input[name="q2"]:checked');
+        let button2=document.getElementById("button2");
+        if(answer&&answer.value=="nlogn"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+button2.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+         function functionq3(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+        let answer=document.querySelector('input[name="q3"]:checked');
+        let button3=document.getElementById("button3");
+        if(answer&&answer.value=="nlogn"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+                button3.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+     function functionq4(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+            let button4=document.getElementById("button4");
+        let answer=document.querySelector('input[name="q4"]:checked');
+        if(answer&&answer.value=="It always follows divide and conquer irrespective of array order"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score:"+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+               button4.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+     function functionq5(){
+            let modalContent=document.getElementById("modalContent");
+            let button5=document.getElementById("button5");
+            let dudo=document.getElementsByClassName("idli");
+        let answer=document.querySelector('input[name="q5"]:checked');
+        if(answer&&answer.value=="n*n"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+                 button5.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+    function functionq6(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+        let button6=document.getElementById("button6");
+        let answer=document.querySelector('input[name="q6"]:checked');
+        if(answer&&answer.value=="logn"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+          button6.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+    function functionq7(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+            let button7=document.getElementById("button7");
+        let answer=document.querySelector('input[name="q7"]:checked');
+        if(answer&&answer.value=="O(E log V)"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+           button7.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+    function functionq8(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+            let button8=document.getElementById("button8");
+        let answer=document.querySelector('input[name="q8"]:checked');
+        if(answer&&answer.value=="O(E*log V)"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+            button8.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+    function functionq9(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+            let button9=document.getElementById("button9");
+        let answer=document.querySelector('input[name="q9"]:checked');
+        if(answer&&answer.value=="O((V + E) log V)"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+            button9.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+    function functionq10(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+            let button10=document.getElementById("button10");
+        let answer=document.querySelector('input[name="q10"]:checked');
+        if(answer&&answer.value=="Memoization and Tabulation"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+             button10.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+     function functionq11(){
+            let modalContent=document.getElementById("modalContent");
+            let dudo=document.getElementsByClassName("idli");
+            let button11=document.getElementById("button11");
+        let answer=document.querySelector('input[name="q11"]:checked');
+        if(answer&&answer.value=="n"){
+            value+=1;
+            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
+            demo.style.display="flex";
+              dudo[0].style.border="5px solid green";
+            setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+             button11.style.display="none";
+        }else{
+            incorrect+=1;
+            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
+            demo.style.display="flex";
+             dudo[0].style.border="5px solid red";
+             setTimeout(()=>{
+                demo.style.display="none";
+            },2000);
+        }
+    }
+        </script>
+    </body>
+</html>
