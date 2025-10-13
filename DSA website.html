@@ -1,443 +1,364 @@
 <!DOCTYPE html>
-<html>
-    <head lang="en">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-        <style>
-            .idi{
-                z-index: 1000;
-                display: none;
-                left:0;
-                top:0;
-                width:100%;
-                height:100%;
-                position: fixed;
-                justify-content: center;
-                background-color: rgba(0,0,0,0.5);
-            }
-            .idli{
-            border:5px solid green;
-            background-color: #fefefe;
-                margin: auto;
-                padding: 20px;
-                width: 80%;
-                max-width: 400px;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                text-align: center;
-                text-decoration-color: green;
-            }
-        
-            #demo{
-                display:none;
-            }
-            h2{
-                margin-left:30%;
-            }
-            form{
-                margin-left:1%;
-            }
-            .mouse{
-                cursor:pointer;
-            }
-        </style>
-    </head>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Quiz Tracker</title>
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  }
+  h1 { color: #00ffcc; }
+  .category-btn, .btn {
+    background: #00ffcc;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .category-btn:hover, .btn:hover { background: #00e6b5; }
+  .option {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #00ffcc;
+    border-radius: 8px;
+    margin: 8px 0;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .option:hover { background: rgba(0,255,200,0.2); }
+  #result {
+    font-size: 1.2em;
+    color: #00ffcc;
+    margin-top: 15px;
+  }
+  /* Progress Bar Styles */
+  .progress-container {
+    width: 100%;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    height: 20px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #00ffcc;
+    text-align: center;
+    line-height: 20px;
+    color: #000;
+    font-weight: bold;
+    transition: width 0.3s;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="mainBox">
+  <h1>🧠 DSA Quiz Tracker</h1>
 
-    <body>
-        <h2>DSA QUESTIONS ON TIME COMPLEXITY</h2>
-        <div id="demo" class="idi">
-        <div class="idli" id="modalContent" ></div></div>
-        <form onsubmit="return false">
-        <label for="q1">What is time Compexity of merge Sort?</label><br>
-      <input   type ="radio" name="q1" id="otpion1" value="n^2">
-      <label for="otpion1" class="mouse">n^2</label><br>
-      <input type ="radio" name="q1" id="otpion2" value="nlogn">
-      <label for="otpion2" class="mouse">n logn</label><br>
-      <input type ="radio" name="q1" id="otpion3" value="n">
-      <label for="otpion3" class="mouse">n</label><br>
-      <input type ="radio" name="q1" id="otpion4" value="loglogn">
-      <label for="otpion4" class="mouse">loglogn</label><br><br>
-      <button onclick="functionq()" id="button1">Check</button>
+  <div id="home">
+    <p>Select a category to start:</p>
+    <button class="category-btn" onclick="startCategory('Time Complexity')">⏱ Time Complexity</button>
+    <button class="category-btn" onclick="startCategory('Sorting Algorithms')">⚙️ Sorting</button>
+    <button class="category-btn" onclick="startCategory('Searching Algorithms')">🔍 Searching</button>
+    <button class="category-btn" onclick="startCategory('Recursion')">🔁 Recursion</button>
+    <button class="category-btn" onclick="startCategory('Graph Algorithms')">🔗 Graphs</button>
+    <button class="category-btn" onclick="startCategory('Trees')">🌳 Trees & BST</button>
+    <button class="category-btn" onclick="startCategory('Dynamic Programming')">🧩 DP</button>
+    <button class="category-btn" onclick="startCategory('Stack and Queue')">📦 Stack & Queue</button>
+    <button class="category-btn" onclick="startCategory('Greedy Algorithms')">💰 Greedy Algorithm</button>
+  </div>
 
-<br><br>
-       <label for="q2">What is time Compexity of quickSort?</label><br>
-      <input type ="radio" name="q2" id="q2otpion1" value="n^2">
-      <label for="q2otpion1" class="mouse">n^2</label><br>
-      <input type ="radio" name="q2" id="q2otpion2" value="nlogn">
-      <label for="q2otpion2" class="mouse">n logn</label><br>
-      <input type ="radio" name="q2" id="q2otpion3" value="n">
-      <label for="q2otpion3" class="mouse">n</label><br>
-      <input type ="radio" name="q2" id="q2otpion4" value="loglogn">
-      <label for="q2otpion4" class="mouse">loglogn</label><br><br>
-      <button onclick="functionq2()" id="button2">Check</button>
-<br><br>
-      <label for="q3">What is wrost time Compexity of mergeSort?</label><br>
-      <input type ="radio" name="q3" id="q3otpion1" value="n^2">
-      <label for="q3otpion1" class="mouse">n^2</label><br>
-      <input type ="radio" name="q3" id="q3otpion2" value="nlogn">
-      <label for="q3otpion2" class="mouse">n logn</label><br>
-      <input type ="radio" name="q3" id="q3otpion3" value="n">
-      <label for="q3otpion3" class="mouse">n</label><br>
-      <input type ="radio" name="q3" id="q3otpion4" value="loglogn">
-      <label for="q3otpion4" class="mouse">loglogn</label><br><br>
-      <button onclick="functionq3()" id="button3">Check</button>
-      <br><br>
-      <label for="q4">Why mergeSort have same time complexity in all the cases?</label><br>
-      <input type ="radio" name="q4" id="q4otpion1" value="It always follows divide and conquer irrespective of array order">
-      <label for="q4otpion1" class="mouse">It always follows divide and conquer irrespective of array order.</label><br>
-      <input type ="radio" name="q4" id="q4otpion2" value="It doesnt care about array size">
-      <label for="q4otpion2" class="mouse">It doesn't care about array size.</label><br>
-      <input type ="radio" name="q4" id="q4otpion3" value="It always follows backtracking irrespective of array order">
-      <label for="q4otpion3" class="mouse">It always follows backtracking irrespective of array order </label><br>
-      <input type ="radio" name="q4" id="q4otpion4" value="Both 1 and 3">
-      <label for="q4otpion4" class="mouse">Both 1 and 3</label><br><br>
-      <button onclick="functionq4()" id="button4">Check</button>
-      <br><br>
-      <label for="q5">What is the wrost time complexity of quickSort?</label><br>
-      <input type ="radio" name="q5" id="q5otpion1" value="n">
-      <label for="q5otpion1" class="mouse">n</label><br>
-      <input type ="radio" name="q5" id="q5otpion2" value="nlogn">
-      <label for="q5otpion2" class="mouse">nlogn</label><br>
-      <input type ="radio" name="q5" id="q5otpion3" value="n*n">
-      <label for="q5otpion3" class="mouse">n*n</label><br>
-      <input type ="radio" name="q5" id="q5otpion4" value="loglogn">
-      <label for="q5otpion4" class="mouse">loglogn</label><br><br>
-      <button onclick="functionq5()" id="button5">Check</button>
-      <br><br>
-       <label for="q6">What is time Compexity of Binary Search?</label><br>
-      <input type ="radio" name="q6" id="q6otpion1" value="n^2">
-      <label for="q6otpion1" class="mouse">n^2</label><br>
-      <input type ="radio" name="q6" id="q6otpion2" value="logn">
-      <label for="q6otpion2" class="mouse">logn</label><br>
-      <input type ="radio" name="q6" id="q6otpion3" value="n">
-      <label for="q6otpion3" class="mouse">n</label><br>
-      <input type ="radio" name="q6" id="q6otpion4" value="loglogn">
-      <label for="q6otpion4" class="mouse">loglogn</label><br><br>
-      <button onclick="functionq6()" id="button6">Check</button>
-       <br><br>
-       <label for="q7">What is time Compexity of Dijistra(when using min-priority queue)?</label><br>
-      <input type ="radio" name="q7" id="q7otpion1" value="O(V+E)">
-      <label for="q7otpion1" class="mouse">O(V+E)</label><br>
-      <input type ="radio" name="q7" id="q7otpion2" value="O((E+V)V)">
-      <label for="q7otpion2" class="mouse">O((E+V)V)</label><br>
-      <input type ="radio" name="q7" id="q7otpion3" value="n logn">
-      <label for="q7otpion3" class="mouse">n logn</label><br>
-      <input type ="radio" name="q7" id="q7otpion4" value="O(E log V)">
-      <label for="q7otpion4" class="mouse">O(E log V)</label><br><br>
-      <button onclick="functionq7()" id="button7">Check</button>
-       <br><br>
-       <label for="q8">What is time Compexity of Krushkal Algorithm?</label><br>
-      <input type ="radio" name="q8" id="q8otpion1" value="O(log V)">
-      <label for="q8otpion1" class="mouse">O(log V)</label><br>
-      <input type ="radio" name="q8" id="q8otpion2" value="O((E+V)V)">
-      <label for="q8otpion2" class="mouse">O((E+V)V)</label><br>
-      <input type ="radio" name="q8" id="q8otpion3" value="O(E+log V)">
-      <label for="q8otpion3" class="mouse">O(E+log V)</label><br>
-      <input type ="radio" name="q8" id="q8otpion4" value="O(E*log V)">
-      <label for="q8otpion4" class="mouse">O(E*log V)</label><br><br>
-      <button onclick="functionq8()" id="button8">Check</button>
-    
-<br><br>
-       <label for="q9">What is time Compexity of Prims Algorithm(using min-heap)?</label><br>
-      <input type ="radio" name="q9" id="q9otpion1" value="O(log V)">
-      <label for="q9otpion1" class="mouse">O(log V)</label><br>
-      <input type ="radio" name="q9" id="q9otpion2" value="O((V + E) log V)">
-      <label for="q9otpion2" class="mouse">O((V + E) log V)</label><br>
-      <input type ="radio" name="q9" id="q9otpion3" value="O(E+log V)">
-      <label for="q9otpion3" class="mouse">O(E+log V)</label><br>
-      <input type ="radio" name="q9" id="q9otpion4" value="O(E/log V)">
-      <label for="q9otpion4" class="mouse">O(E/log V)</label><br><br>
-      <button onclick="functionq9()" id="button9">Check</button>
-      <br><br>
-       <label for="q10">Which technique used in dynamic programming?</label><br>
-      <input type ="radio" name="q10" id="q10otpion1" value="Memoization and Tabulation">
-      <label for="q10otpion1" class="mouse">Memoization and Tabulation</label><br>
-      <input type ="radio" name="q10" id="q10otpion2" value="Backtracking">
-      <label for="q10otpion2" class="mouse">Backtracking</label><br>
-      <input type ="radio" name="q10" id="q10otpion3" value="Greedy Algorithm">
-      <label for="q10otpion3" class="mouse">Greedy Algorithm</label><br>
-      <input type ="radio" name="q10" id="q10otpion4" value="Divide and Conquer">
-      <label for="q10otpion4" class="mouse">Divide and Conquer</label><br><br>
-      <button onclick="functionq10()" id="button10">Check</button>
-      <br><br>
-       <label for="q11">What is the time complexity of linear search in the wrost case?</label><br>
-      <input type ="radio" name="q11" id="q11otpion1" value="logn">
-      <label for="q11otpion1" class="mouse">log n</label><br>
-      <input type ="radio" name="q11" id="q11otpion2" value="loglogn">
-      <label for="q11otpion2" class="mouse">loglogn</label><br>
-      <input type ="radio" name="q11" id="q11otpion3" value="n*n">
-      <label for="q11otpion3" class="mouse">n*n</label><br>
-      <input type ="radio" name="q11" id="q11otpion4" value="n">
-      <label for="q11otpion4" class="mouse">n</label><br><br>
-      <button onclick="functionq11()" id="button11">Check</button>
-      </form>
-    <script>
-        let value=0;
-        let incorrect=0;
-        function functionq(){
-            let modalContent=document.getElementById("modalContent");
-            let button1=document.getElementById("button1");
-            let dudo=document.getElementsByClassName("idli");
-        let answer=document.querySelector('input[name="q1"]:checked');
-        if(answer&&answer.value=="nlogn"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-            dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-            button1.style.display="none";
+  <div id="quiz" style="display:none;">
+    <h3 id="category"></h3>
 
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-            dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-         function functionq2(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-        let answer=document.querySelector('input[name="q2"]:checked');
-        let button2=document.getElementById("button2");
-        if(answer&&answer.value=="nlogn"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-button2.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-         function functionq3(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-        let answer=document.querySelector('input[name="q3"]:checked');
-        let button3=document.getElementById("button3");
-        if(answer&&answer.value=="nlogn"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-                button3.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-     function functionq4(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-            let button4=document.getElementById("button4");
-        let answer=document.querySelector('input[name="q4"]:checked');
-        if(answer&&answer.value=="It always follows divide and conquer irrespective of array order"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score:"+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-               button4.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-     function functionq5(){
-            let modalContent=document.getElementById("modalContent");
-            let button5=document.getElementById("button5");
-            let dudo=document.getElementsByClassName("idli");
-        let answer=document.querySelector('input[name="q5"]:checked');
-        if(answer&&answer.value=="n*n"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-                 button5.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-    function functionq6(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-        let button6=document.getElementById("button6");
-        let answer=document.querySelector('input[name="q6"]:checked');
-        if(answer&&answer.value=="logn"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-          button6.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-    function functionq7(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-            let button7=document.getElementById("button7");
-        let answer=document.querySelector('input[name="q7"]:checked');
-        if(answer&&answer.value=="O(E log V)"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-           button7.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-    function functionq8(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-            let button8=document.getElementById("button8");
-        let answer=document.querySelector('input[name="q8"]:checked');
-        if(answer&&answer.value=="O(E*log V)"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-            button8.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-    function functionq9(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-            let button9=document.getElementById("button9");
-        let answer=document.querySelector('input[name="q9"]:checked');
-        if(answer&&answer.value=="O((V + E) log V)"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-            button9.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-    function functionq10(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-            let button10=document.getElementById("button10");
-        let answer=document.querySelector('input[name="q10"]:checked');
-        if(answer&&answer.value=="Memoization and Tabulation"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-             button10.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-     function functionq11(){
-            let modalContent=document.getElementById("modalContent");
-            let dudo=document.getElementsByClassName("idli");
-            let button11=document.getElementById("button11");
-        let answer=document.querySelector('input[name="q11"]:checked');
-        if(answer&&answer.value=="n"){
-            value+=1;
-            modalContent.innerHTML="correct Answer"+"<br>"+"score: "+value;
-            demo.style.display="flex";
-              dudo[0].style.border="5px solid green";
-            setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-             button11.style.display="none";
-        }else{
-            incorrect+=1;
-            modalContent.innerHTML="incorrect Answer"+"<br>"+incorrect;
-            demo.style.display="flex";
-             dudo[0].style.border="5px solid red";
-             setTimeout(()=>{
-                demo.style.display="none";
-            },2000);
-        }
-    }
-        </script>
-    </body>
+    <!-- Per-question progress bar -->
+    <div class="progress-container">
+      <div class="progress-bar" id="questionProgress">0%</div>
+    </div>
+
+    <h2 id="question"></h2>
+    <div id="options"></div>
+    <button class="btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+  </div>
+
+  <div id="report" style="display:none;">
+    <h2>📊 Quiz Completed</h2>
+    <div id="reportContent"></div>
+    <button class="btn" onclick="goHome()">🏠 Go Home</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  // Time Complexity
+  {cat:"Time Complexity",q:"Time complexity of Merge Sort?",a:["O(n^2)","O(n log n)","O(n)","O(log n)"],c:"O(n log n)"},
+  {cat:"Time Complexity",q:"Worst-case time complexity of QuickSort?",a:["O(n^2)","O(n log n)","O(n)","O(log n)"],c:"O(n^2)"},
+  {cat:"Time Complexity",q:"Binary Search time complexity?",a:["O(n)","O(log n)","O(1)","O(n log n)"],c:"O(log n)"},
+  {cat:"Time Complexity",q:"Linear Search worst case?",a:["O(n)","O(1)","O(log n)","O(n log n)"],c:"O(n)"},
+  {cat:"Time Complexity",q:"Best case of Bubble Sort?",a:["O(n)","O(n^2)","O(log n)","O(n log n)"],c:"O(n)"},
+  {cat:"Time Complexity",q:"What is the time complexity of finding an element in a linked list?",a:["O(n)","O(n^2)","O(n log n)","O(log n)"],c:"O(n)"},
+  {cat:"Time Complexity",q:"What is the time complexity of stack/queue operations (push/pop/enqueue/dequeue)?",a:["O(n)","O(n^2)","O(1)","O(n log n)"],c:"O(1)"},
+  {cat:"Time Complexity",q:"What is the time complexity of hash map operations (average and worst)?",a:["O(n),O(n log n)","O(n log n),O(n)","O(log n),O(log n)","O(1),O(n)"],c:"O(1),O(n)"},
+  {cat:"Time Complexity",q:"Linear Search best case?",a:["O(n)","O(1)","O(log n)","O(n log n)"],c:"O(1)"},
+  {cat:"Time Complexity",q:"What is the time complexity of inserting in a sorted array?",a:["O(n log n)","O(n)","O(log n)","O(1)"],c:"O(n)"},
+  {cat:"Time Complexity",q:"What is the time complexity of inserting/removing an element from a linked list (beginning)?",a:["O(1)","O(n)","O(n log n)","O(log n)"],c:"O(1)"},
+  {cat:"Time Complexity",q:"What is the time complexity of accessing an element in an array?",a:["O(n^2)","O(1)","O(n)","O(log n)"],c:"O(1)"},
+  // Sorting
+  {cat:"Sorting Algorithms",q:"Merge Sort uses which technique?",a:["Greedy","Divide & Conquer","DP","Backtracking"],c:"Divide & Conquer"},
+  {cat:"Sorting Algorithms",q:"What is the worst-case time complexity of Quick Sort?",a:["O(n log n)","O(n²)","O(n)","O(log n)"],c:"O(n²)"},
+  {cat:"Sorting Algorithms",q:"Which sorting algorithm is the most efficient for nearly sorted data?",a:["Bubble Sort","Insertion Sort","Selection Sort","Heap Sort"],c:"Insertion Sort"},
+  {cat:"Sorting Algorithms",q:"Which sorting algorithm is not based on comparisons?",a:["Merge Sort","Counting Sort","Quick Sort","Heap Sort"],c:"Counting Sort"},
+  {cat:"Sorting Algorithms",q:"What is the space complexity of Merge Sort?",a:["O(1)","O(log n)","O(n)","O(n²)"],c:"O(n)"},
+  {cat:"Sorting Algorithms",q:"Which algorithm has the best average-case performance?",a:["Quick Sort","Bubble Sort","Insertion Sort","Selection Sort"],c:"Quick Sort"},
+  {cat:"Sorting Algorithms",q:"Which sorting algorithm can be implemented using recursion or iteration?",a:["Merge Sort","Selection Sort","Counting Sort","Bucket Sort"],c:"Merge Sort"},
+  {cat:"Sorting Algorithms",q:"Heap Sort is based on which data structure?",a:["Stack","Queue","Heap","Tree"],c:"Heap"},
+  {cat:"Sorting Algorithms",q:"Which sorting algorithm is stable?",a:["Quick Sort","Heap Sort","Merge Sort","Selection Sort"],c:"Merge Sort"},
+  {cat:"Sorting Algorithms",q:"Which algorithm performs the least number of swaps?",a:["Selection Sort","Bubble Sort","Quick Sort","Insertion Sort"],c:"Selection Sort"},
+  {cat:"Sorting Algorithms",q:"What is the best-case time complexity of Insertion Sort?",a:["O(n)","O(n log n)","O(n²)","O(1)"],c:"O(n)"},
+  {cat:"Sorting Algorithms",q:"Which sorting algorithm is most suitable for sorting linked lists?",a:["Merge Sort","Quick Sort","Heap Sort","Counting Sort"],c:"Merge Sort"},
+  {cat:"Sorting Algorithms",q:"In Quick Sort, the partitioning element is called?",a:["Pivot","Root","Key","Divider"],c:"Pivot"},
+  {cat:"Sorting Algorithms",q:"Which sorting algorithm works by repeatedly finding the minimum element?",a:["Bubble Sort","Selection Sort","Insertion Sort","Merge Sort"],c:"Selection Sort"},
+  {cat:"Sorting Algorithms",q:"Counting Sort works efficiently when the range of input values is?",a:["Large","Very large","Small","Random"],c:"Small"},
+  // Searching
+  {cat:"Searching Algorithms",q:"Binary Search works on?",a:["Sorted arrays","Unsorted arrays","Trees","Graphs"],c:"Sorted arrays"},
+  {cat:"Searching Algorithms",q:"What is the time complexity of Linear Search in the worst case?",a:["O(1)","O(log n)","O(n)","O(n log n)"],c:"O(n)"},
+  {cat:"Searching Algorithms",q:"What is the time complexity of Binary Search in the best case?",a:["O(1)","O(log n)","O(n)","O(n²)"],c:"O(1)"},
+  {cat:"Searching Algorithms",q:"Which of the following cannot be used with Binary Search?",a:["Sorted Array","Linked List","Binary Search Tree","Ordered List"],c:"Linked List"},
+  {cat:"Searching Algorithms",q:"In Binary Search, if the element is not found, how many times is the array divided?",a:["log₂n","n","n/2","n²"],c:"log₂n"},
+  {cat:"Searching Algorithms",q:"What is the advantage of Binary Search over Linear Search?",a:["Less memory usage","Faster for sorted data","Can be used for unsorted data","Simpler to implement"],c:"Faster for sorted data"},
+  {cat:"Searching Algorithms",q:"Which search algorithm checks every element until the target is found?",a:["Binary Search","Interpolation Search","Linear Search","Jump Search"],c:"Linear Search"},
+  {cat:"Searching Algorithms",q:"Which searching algorithm works efficiently for uniformly distributed data?",a:["Binary Search","Interpolation Search","Exponential Search","Linear Search"],c:"Interpolation Search"},
+  {cat:"Searching Algorithms",q:"Jump Search has a time complexity of?",a:["O(n)","O(log n)","O(√n)","O(n²)"],c:"O(√n)"},
+  {cat:"Searching Algorithms",q:"Exponential Search is useful when?",a:["Array size is unknown","Array is small","Array is unsorted","Array has duplicates"],c:"Array size is unknown"},
+  {cat:"Searching Algorithms",q:"Which of the following searching algorithms uses a divide-and-conquer approach?",a:["Linear Search","Binary Search","Jump Search","Hash Search"],c:"Binary Search"},
+  {cat:"Searching Algorithms",q:"Hash-based searching has an average time complexity of?",a:["O(1)","O(log n)","O(n)","O(n²)"],c:"O(1)"},
+  {cat:"Searching Algorithms",q:"What is the space complexity of Binary Search (iterative)?",a:["O(n)","O(log n)","O(1)","O(n²)"],c:"O(1)"},
+  {cat:"Searching Algorithms",q:"Which searching algorithm uses hashing to store data for quick access?",a:["Binary Search","Linear Search","Hash Search","Jump Search"],c:"Hash Search"},
+  {cat:"Searching Algorithms",q:"In Interpolation Search, the position to be checked is determined using?",a:["Midpoint formula","Probing function","Interpolation formula","Hash function"],c:"Interpolation formula"},
+
+  // Recursion
+  {cat:"Recursion",q:"Recursion uses which data structure?",a:["Stack","Queue","Heap","Tree"],c:"Stack"},
+  {cat:"Recursion",q:"What is the base condition in recursion?",a:["A condition that stops recursion","A condition that restarts recursion","A loop condition","None of these"],c:"A condition that stops recursion"},
+  {cat:"Recursion",q:"Which of the following problems is best solved using recursion?",a:["Sorting an array","Finding factorial","Reversing an array","Matrix multiplication"],c:"Finding factorial"},
+  {cat:"Recursion",q:"In recursion, if the base case is not defined, it leads to?",a:["Compilation error","Stack Overflow","Memory Leak","Segmentation Fault"],c:"Stack Overflow"},
+  {cat:"Recursion",q:"Recursion can always be converted to?",a:["Iteration","Loop","Stack operations","Array operations"],c:"Iteration"},
+  {cat:"Recursion",q:"Which function calls itself directly or indirectly?",a:["Recursive Function","Inline Function","Static Function","Friend Function"],c:"Recursive Function"},
+  {cat:"Recursion",q:"Tail recursion is when the recursive call is?",a:["At the beginning","In the middle","At the end of function","Never used"],c:"At the end of function"},
+  {cat:"Recursion",q:"Which algorithm is an example of recursion?",a:["Binary Search","Bubble Sort","Selection Sort","Counting Sort"],c:"Binary Search"},
+  {cat:"Recursion",q:"Recursion is mostly used to solve problems that have?",a:["Sequential structure","Repetitive pattern","Hierarchical or Divide-and-Conquer structure","Constant structure"],c:"Hierarchical or Divide-and-Conquer structure"},
+  {cat:"Recursion",q:"What happens in every recursive call?",a:["New memory is allocated in stack","Old memory is overwritten","No new memory used","Heap memory increases"],c:"New memory is allocated in stack"},
+  {cat:"Recursion",q:"Which of the following is NOT a type of recursion?",a:["Direct","Indirect","Multiple","Iterative"],c:"Iterative"},
+  {cat:"Recursion",q:"Fibonacci sequence using recursion has what time complexity?",a:["O(n)","O(log n)","O(2ⁿ)","O(n²)"],c:"O(2ⁿ)"},
+  {cat:"Recursion",q:"What is the main drawback of recursion?",a:["Difficult to understand","Takes more memory and time","Less flexible","Needs loops"],c:"Takes more memory and time"},
+  {cat:"Recursion",q:"Mutual recursion occurs when?",a:["A function calls itself","Two or more functions call each other","Recursion happens without base case","Recursion stops early"],c:"Two or more functions call each other"},
+  {cat:"Recursion",q:"Which of the following is a benefit of recursion?",a:["Improves execution speed","Reduces code complexity","Consumes less memory","Eliminates function calls"],c:"Reduces code complexity"},
+  // Graph
+  {cat:"Graph Algorithms",q:"Dijkstra complexity (min-heap)?",a:["O(E log V)","O(V^2)","O(VE)","O(E+V)"],c:"O(E log V)"},
+  {cat:"Graph Algorithms",q:"Which algorithm is used to detect a cycle in an undirected graph?",a:["Dijkstra","Prim’s","DFS","Kruskal"],c:"DFS"},
+  {cat:"Graph Algorithms",q:"Which algorithm finds the shortest path in a weighted graph with no negative edges?",a:["Dijkstra","Bellman-Ford","Floyd-Warshall","Prim’s"],c:"Dijkstra"},
+  {cat:"Graph Algorithms",q:"Which algorithm works even with negative edge weights?",a:["Dijkstra","Bellman-Ford","Prim’s","Kruskal"],c:"Bellman-Ford"},
+  {cat:"Graph Algorithms",q:"Which algorithm finds the Minimum Spanning Tree (MST)?",a:["Kruskal","Bellman-Ford","Dijkstra","Floyd-Warshall"],c:"Kruskal"},
+  {cat:"Graph Algorithms",q:"Prim’s Algorithm is based on which technique?",a:["Divide & Conquer","Greedy","Dynamic Programming","Backtracking"],c:"Greedy"},
+  {cat:"Graph Algorithms",q:"Which algorithm can find the shortest paths between all pairs of vertices?",a:["Floyd-Warshall","Dijkstra","Kruskal","Prim’s"],c:"Floyd-Warshall"},
+  {cat:"Graph Algorithms",q:"Kruskal’s Algorithm uses which data structure?",a:["Heap","Queue","Disjoint Set (Union-Find)","Stack"],c:"Disjoint Set (Union-Find)"},
+  {cat:"Graph Algorithms",q:"Breadth-First Search (BFS) uses which data structure?",a:["Stack","Queue","Heap","Tree"],c:"Queue"},
+  {cat:"Graph Algorithms",q:"Depth-First Search (DFS) uses which data structure?",a:["Queue","Stack","Heap","Graph"],c:"Stack"},
+  {cat:"Graph Algorithms",q:"What is the time complexity of BFS on a graph?",a:["O(V+E)","O(V²)","O(E log V)","O(VE)"],c:"O(V+E)"},
+  {cat:"Graph Algorithms",q:"Topological Sorting applies only to which type of graph?",a:["Directed Acyclic Graph","Undirected Graph","Weighted Graph","Complete Graph"],c:"Directed Acyclic Graph"},
+  {cat:"Graph Algorithms",q:"Which algorithm is used to detect a cycle in a directed graph?",a:["DFS","BFS","Kruskal","Prim’s"],c:"DFS"},
+  {cat:"Graph Algorithms",q:"Which algorithm helps to find the strongly connected components?",a:["Kosaraju","Prim’s","Kruskal","Dijkstra"],c:"Kosaraju"},
+  {cat:"Graph Algorithms",q:"In an adjacency matrix representation, space complexity is?",a:["O(V+E)","O(V²)","O(E)","O(V log V)"],c:"O(V²)"},
+  // Trees
+  {cat:"Trees",q:"What is a leaf node in a tree?",a:["Node with two children","Node with no children","Root node","Internal node"],c:"Node with no children"},
+  {cat:"Trees",q:"What is the maximum number of nodes in a binary tree of height h?",a:["2^h","2^(h+1) - 1","h^2","h+1"],c:"2^(h+1) - 1"},
+  {cat:"Trees",q:"In a binary search tree (BST), the left child is always?",a:["Greater than root","Smaller than root","Equal to root","Random"],c:"Smaller than root"},
+  {cat:"Trees",q:"Which tree traversal gives nodes in sorted order for a BST?",a:["Preorder","Postorder","Inorder","Level order"],c:"Inorder"},
+  {cat:"Trees",q:"A full binary tree of height h has how many leaf nodes?",a:["2^h","h","2^(h+1)","h^2"],c:"2^h"},
+  {cat:"Trees",q:"What is the time complexity of searching in a balanced BST?",a:["O(n)","O(log n)","O(1)","O(n log n)"],c:"O(log n)"},
+  {cat:"Trees",q:"Which traversal is used to copy a binary tree?",a:["Inorder","Preorder","Postorder","Level order"],c:"Preorder"},
+  {cat:"Trees",q:"In a binary tree, each node has at most?",a:["1 child","2 children","3 children","4 children"],c:"2 children"},
+  {cat:"Trees",q:"Height of a tree is measured as?",a:["Number of nodes","Number of edges in longest path from root","Sum of all levels","Depth of root"],c:"Number of edges in longest path from root"},
+  {cat:"Trees",q:"Which traversal is used for deleting a binary tree?",a:["Preorder","Inorder","Postorder","Level order"],c:"Postorder"},
+  {cat:"Trees",q:"Level order traversal of a tree is done using?",a:["Stack","Queue","Recursion","Priority Queue"],c:"Queue"},
+  {cat:"Trees",q:"What is a complete binary tree?",a:["Every level except possibly last is full and nodes are left-aligned","Every node has 2 children","All leaves are at same level","Only left subtree exists"],c:"Every level except possibly last is full and nodes are left-aligned"},
+  {cat:"Trees",q:"What is the maximum number of nodes at level ‘l’ in a binary tree?",a:["l","2^(l-1)","2^l","2l"],c:"2^(l-1)"},
+  {cat:"Trees",q:"Which tree has all its nodes either with 0 or 2 children?",a:["Full Binary Tree","Complete Binary Tree","Perfect Binary Tree","Balanced Binary Tree"],c:"Full Binary Tree"},
+  {cat:"Trees",q:"In a balanced binary tree, the difference between heights of left and right subtrees is at most?",a:["1","2","3","4"],c:"1"},
+  // DP
+  {cat:"Dynamic Programming",q:"Dynamic Programming is mainly used to solve problems having?",a:["Greedy property","Overlapping subproblems and optimal substructure","Backtracking property","Random structure"],c:"Overlapping subproblems and optimal substructure"},
+  {cat:"Dynamic Programming",q:"Which of the following is a classic example of DP?",a:["Binary Search","Fibonacci sequence","Quick Sort","DFS"],c:"Fibonacci sequence"},
+  {cat:"Dynamic Programming",q:"In DP, overlapping subproblems are stored using?",a:["Stack","Queue","Memoization or Tabulation","Recursion only"],c:"Memoization or Tabulation"},
+  {cat:"Dynamic Programming",q:"What is the time complexity of the DP solution for Fibonacci numbers?",a:["O(2ⁿ)","O(n)","O(log n)","O(n²)"],c:"O(n)"},
+  {cat:"Dynamic Programming",q:"Which of the following is a bottom-up approach?",a:["Memoization","Recursion","Tabulation","Brute Force"],c:"Tabulation"},
+  {cat:"Dynamic Programming",q:"The 0/1 Knapsack problem is solved efficiently using?",a:["Divide & Conquer","Greedy Algorithm","Dynamic Programming","Backtracking"],c:"Dynamic Programming"},
+  {cat:"Dynamic Programming",q:"Which property is essential for a problem to be solved using DP?",a:["Backtracking property","Greedy choice property","Optimal substructure","Randomness"],c:"Optimal substructure"},
+  {cat:"Dynamic Programming",q:"Which of the following approaches uses recursion with caching?",a:["Tabulation","Memoization","Greedy","Backtracking"],c:"Memoization"},
+  {cat:"Dynamic Programming",q:"In DP, tabulation method uses which order of computation?",a:["Top-down","Bottom-up","Random","Mixed"],c:"Bottom-up"},
+  {cat:"Dynamic Programming",q:"Which algorithm uses DP to find the shortest path in a graph?",a:["Kruskal","Bellman-Ford","Dijkstra","Prim"],c:"Bellman-Ford"},
+  {cat:"Dynamic Programming",q:"Longest Common Subsequence (LCS) problem can be solved using?",a:["Greedy Algorithm","Dynamic Programming","Divide and Conquer","Backtracking"],c:"Dynamic Programming"},
+  {cat:"Dynamic Programming",q:"Which of the following problems cannot be solved using DP?",a:["Fibonacci","Merge Sort","Knapsack","Matrix Chain Multiplication"],c:"Merge Sort"},
+  {cat:"Dynamic Programming",q:"What is the space complexity of a standard DP table for LCS of strings with lengths m and n?",a:["O(m+n)","O(mn)","O(max(m,n))","O(1)"],c:"O(mn)"},
+  {cat:"Dynamic Programming",q:"In memoization, results of subproblems are stored in?",a:["Stack","Table (usually array or map)","Queue","Heap"],c:"Table (usually array or map)"},
+  {cat:"Dynamic Programming",q:"Matrix Chain Multiplication problem is solved using?",a:["Greedy Algorithm","Dynamic Programming","Recursion only","Divide & Conquer"],c:"Dynamic Programming"},
+  // Stack Queue
+  {cat:"Stack and Queue",q:"Stack follows which principle?",a:["FIFO","LIFO","FILO","LILO"],c:"LIFO"},
+  {cat:"Stack and Queue",q:"Queue follows which principle?",a:["LIFO","FIFO","Random","FILO"],c:"FIFO"},
+  {cat:"Stack and Queue",q:"Which data structure is used for function call management in recursion?",a:["Queue","Stack","Array","Heap"],c:"Stack"},
+  {cat:"Stack and Queue",q:"Which of the following operations is not valid for a stack?",a:["Push","Pop","Peek","Enqueue"],c:"Enqueue"},
+  {cat:"Stack and Queue",q:"Which data structure is used in Breadth-First Search (BFS)?",a:["Stack","Queue","Heap","Tree"],c:"Queue"},
+  {cat:"Stack and Queue",q:"Which data structure is used in Depth-First Search (DFS)?",a:["Queue","Stack","Tree","Heap"],c:"Stack"},
+  {cat:"Stack and Queue",q:"In a stack, which operation removes the top element?",a:["Pop","Push","Peek","Insert"],c:"Pop"},
+  {cat:"Stack and Queue",q:"In a queue, which operation adds an element at the rear?",a:["Dequeue","Enqueue","Push","Pop"],c:"Enqueue"},
+  {cat:"Stack and Queue",q:"In a circular queue, when front == rear + 1, the queue is?",a:["Empty","Full","Half","Invalid"],c:"Full"},
+  {cat:"Stack and Queue",q:"Which of the following can be used to check for balanced parentheses?",a:["Queue","Stack","Array","HashMap"],c:"Stack"},
+  {cat:"Stack and Queue",q:"The time complexity of push and pop operations in a stack is?",a:["O(n)","O(1)","O(log n)","O(n log n)"],c:"O(1)"},
+  {cat:"Stack and Queue",q:"Which of these is a type of queue where insertion and deletion can happen at both ends?",a:["Circular Queue","Double-ended Queue (Deque)","Priority Queue","Simple Queue"],c:"Double-ended Queue (Deque)"},
+  {cat:"Stack and Queue",q:"Which data structure is best suited for implementing undo operations?",a:["Queue","Stack","Tree","Array"],c:"Stack"},
+  {cat:"Stack and Queue",q:"Which type of queue assigns priority to elements?",a:["Simple Queue","Circular Queue","Priority Queue","Double-ended Queue"],c:"Priority Queue"},
+  {cat:"Stack and Queue",q:"If N elements are pushed and then popped from a stack, how many sequences are possible?",a:["N","N!","2^N","N^2"],c:"Catalan number related (not fixed count)"},
+  //Greedy Algorthm
+  {cat:"Greedy Algorithms",q:"Greedy algorithms are based on which principle?",a:["Divide and Conquer","Local optimum leads to global optimum","Dynamic Programming","Backtracking"],c:"Local optimum leads to global optimum"},
+  {cat:"Greedy Algorithms",q:"Which of the following is a classic example of a greedy algorithm?",a:["Fibonacci sequence","Dijkstra’s Algorithm","Merge Sort","Bellman-Ford Algorithm"],c:"Dijkstra’s Algorithm"},
+  {cat:"Greedy Algorithms",q:"Which problem is solved using Kruskal’s Algorithm?",a:["Shortest Path","Minimum Spanning Tree","Longest Path","Topological Sort"],c:"Minimum Spanning Tree"},
+  {cat:"Greedy Algorithms",q:"Which algorithm is used for finding the Minimum Spanning Tree using greedy approach?",a:["Bellman-Ford","Floyd-Warshall","Prim’s Algorithm","A* Search"],c:"Prim’s Algorithm"},
+  {cat:"Greedy Algorithms",q:"What is the time complexity of Kruskal’s Algorithm?",a:["O(V²)","O(E log E)","O(V log V)","O(E²)"],c:"O(E log E)"},
+  {cat:"Greedy Algorithms",q:"Which of these is NOT a greedy algorithm?",a:["Fractional Knapsack","Huffman Coding","Dijkstra’s Algorithm","0/1 Knapsack"],c:"0/1 Knapsack"},
+  {cat:"Greedy Algorithms",q:"Huffman Coding is used for?",a:["Encryption","Data Compression","Sorting","Searching"],c:"Data Compression"},
+  {cat:"Greedy Algorithms",q:"In Fractional Knapsack problem, items are chosen based on?",a:["Weight","Value","Value/Weight ratio","Random order"],c:"Value/Weight ratio"},
+  {cat:"Greedy Algorithms",q:"Which of the following is a limitation of greedy algorithms?",a:["Always finds the optimal solution","May not work for all problems","Takes more time","Requires recursion"],c:"May not work for all problems"},
+  {cat:"Greedy Algorithms",q:"Activity Selection problem is solved using?",a:["Dynamic Programming","Greedy Algorithm","Backtracking","Divide and Conquer"],c:"Greedy Algorithm"},
+  {cat:"Greedy Algorithms",q:"Which data structure is commonly used in Huffman Coding?",a:["Stack","Queue","Priority Queue (Min-Heap)","Array"],c:"Priority Queue (Min-Heap)"},
+  {cat:"Greedy Algorithms",q:"In Dijkstra’s Algorithm, what is selected greedily at each step?",a:["Node with smallest degree","Node with maximum distance","Node with minimum distance","Random node"],c:"Node with minimum distance"},
+  {cat:"Greedy Algorithms",q:"Which of the following is true about greedy algorithms?",a:["They always guarantee the global optimum","They make locally optimal choices","They use recursion heavily","They require dynamic programming"],c:"They make locally optimal choices"},
+  {cat:"Greedy Algorithms",q:"The greedy approach is most suitable when the problem has?",a:["Overlapping subproblems","Optimal substructure and greedy choice property","Backtracking property","Divide and Conquer property"],c:"Optimal substructure and greedy choice property"},
+  {cat:"Greedy Algorithms",q:"Which of the following uses a greedy strategy for job scheduling?",a:["Job Sequencing with Deadlines","0/1 Knapsack","Matrix Chain Multiplication","Longest Common Subsequence"],c:"Job Sequencing with Deadlines"},
+];
+
+let current=0, score=0, currentCat="", selectedQuestions=[];
+
+function startCategory(cat){
+  currentCat=cat;
+  selectedQuestions = questions.filter(q=>q.cat===cat);
+  current=0; score=0;
+  document.getElementById("home").style.display="none";
+  document.getElementById("quiz").style.display="block";
+  document.getElementById("category").innerText="Category: "+cat;
+  loadQuestion();
+}
+
+function loadQuestion(){
+  const q=selectedQuestions[current];
+  document.getElementById("question").innerText=`Q${current+1}. ${q.q}`;
+
+  // Update per-question progress bar
+  const progress = Math.round(((current)/selectedQuestions.length)*100);
+  const progressBar = document.getElementById("questionProgress");
+  progressBar.style.width = progress + "%";
+  progressBar.textContent = progress + "%";
+
+  const optionsDiv=document.getElementById("options");
+  optionsDiv.innerHTML="";
+  q.a.forEach(opt=>{
+    const div=document.createElement("div");
+    div.className="option";
+    div.innerText=opt;
+    div.onclick=()=>selectOption(div,opt,q.c);
+    optionsDiv.appendChild(div);
+  });
+}
+
+function selectOption(el, chosen, correct) {
+  const all = document.querySelectorAll(".option");
+
+  // Disable all options
+  all.forEach(o => o.style.pointerEvents = "none");
+
+  if (chosen === correct) {
+    // Correct choice
+    el.style.backgroundColor = "rgba(0,255,0,0.4)";
+    score++;
+  } else {
+    // Wrong choice: highlight chosen red
+    el.style.backgroundColor = "rgba(255,0,0,0.4)";
+
+    // Highlight the correct option green
+    all.forEach(o => {
+      if (o.innerText.trim() === correct) {
+        o.style.backgroundColor = "rgba(0,255,0,0.4)";
+      }
+    });
+  }
+}
+
+
+function nextQuestion(){
+  if(current<selectedQuestions.length-1){current++;loadQuestion();}
+  else{finishCategory();}
+}
+
+function finishCategory(){
+  saveScore(currentCat,score,selectedQuestions.length);
+  document.getElementById("quiz").style.display="none";
+  document.getElementById("report").style.display="block";
+  buildReport();
+}
+
+function buildReport(){
+  const hist=JSON.parse(localStorage.getItem("dsaScores")||"{}");
+  let strongest="", weakest="";
+  let max=-1, min=9999;
+  for(const cat in hist){
+    const s=hist[cat][hist[cat].length-1];
+    if(s.score>max){max=s.score; strongest=cat;}
+    if(s.score<min){min=s.score; weakest=cat;}
+  }
+  const currentScore=hist[currentCat][hist[currentCat].length-1];
+  const prevScore = hist[currentCat].length>1 ? hist[currentCat][hist[currentCat].length-2] : null;
+  let improvementText = prevScore ? 
+    `Previous: ${prevScore.score}/${prevScore.total} → Now: ${currentScore.score}/${currentScore.total}` :
+    `First attempt in ${currentCat}.For next attempt your improvement will visible`;
+  document.getElementById("reportContent").innerHTML=`
+    <p><b>Category:</b> ${currentCat}</p>
+    <p><b>Score:</b> ${currentScore.score}/${currentScore.total}</p>
+    <p><b>Improvement:</b> ${improvementText}</p>
+    <hr>
+    <p><b>Strongest Topic:</b> ${strongest}</p>
+    <p><b>Weakest Topic:</b> ${weakest}</p>
+  `;
+}
+
+function saveScore(cat,score,total){
+  let data=JSON.parse(localStorage.getItem("dsaScores")||"{}");
+  if(!data[cat]) data[cat]=[];
+  data[cat].push({score,total,ts:Date.now()});
+  localStorage.setItem("dsaScores",JSON.stringify(data));
+}
+
+function goHome(){
+  document.getElementById("report").style.display="none";
+  document.getElementById("home").style.display="block";
+}
+</script>
+</body>
 </html>
