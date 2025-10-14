@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Fun Game</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+    }
+    #question {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      padding: 10px;
+      font-size: 20px;
+      width: 150px;
+      text-align: center;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      display: none; /* hidden until start */
+    }
+    #startBtn, #restartBtn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #00c6ff;
+      color: #fff;
+      transition: 0.3s;
+    }
+    #startBtn:hover, #restartBtn:hover {
+      background: #0072ff;
+    }
+    .scoreboard {
+      font-size: 22px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧮 Math Fun Game</h1>
+    <div id="timer">⏱️ Time: 30s</div>
+    <div id="question">Press Start to Begin</div>
+    <input type="number" id="answer" placeholder="Answer" />
+    <div>
+      <button id="startBtn">Start</button>
+      <button id="restartBtn" style="display:none;">Restart</button>
+    </div>
+    <div class="scoreboard">
+      <div>Score: <span id="score">0</span></div>
+      <div>🏆 High Score: <span id="highscore">0</span></div>
+    </div>
+  </div>
+
+  <script>
+    const question = document.getElementById("question");
+    const answerInput = document.getElementById("answer");
+    const startBtn = document.getElementById("startBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const timerDisplay = document.getElementById("timer");
+    const scoreDisplay = document.getElementById("score");
+    const highscoreDisplay = document.getElementById("highscore");
+
+    let score = 0;
+    let highscore = localStorage.getItem("mathHighscore") || 0;
+    let timeLeft = 30;
+    let timer;
+    let correctAnswer;
+
+    highscoreDisplay.textContent = highscore;
+
+    function generateQuestion() {
+      const level = score < 5 ? 10 : score < 10 ? 50 : 100;
+      let num1 = Math.floor(Math.random() * level) + 1;
+      let num2 = Math.floor(Math.random() * level) + 1;
+      const operations = ['+', '-', '*', '/'];
+      const op = operations[Math.floor(Math.random() * operations.length)];
+
+      // Adjust numbers for subtraction and division
+      if (op === '-') {
+        if (num2 > num1) [num1, num2] = [num2, num1]; // swap to avoid negative
+        correctAnswer = num1 - num2;
+      } 
+      else if (op === '+') {
+        correctAnswer = num1 + num2;
+      } 
+      else if (op === '*') {
+        correctAnswer = num1 * num2;
+      } 
+      else if (op === '/') {
+        // Ensure division gives integer result
+        correctAnswer = Math.floor(Math.random() * level) + 1;
+        num2 = Math.floor(Math.random() * level) + 1;
+        num1 = correctAnswer * num2; // make divisible
+      }
+
+      question.textContent = `${num1} ${op} ${num2}`;
+      answerInput.value = "";
+      answerInput.focus();
+    }
+
+    function startGame() {
+      score = 0;
+      timeLeft = 30;
+      scoreDisplay.textContent = score;
+      startBtn.style.display = "none";
+      restartBtn.style.display = "none";
+      answerInput.style.display = "inline-block";
+      answerInput.disabled = false;
+      generateQuestion();
+
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `⏱️ Time: ${timeLeft}s`;
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      question.textContent = `⏹️ Time's up! Final Score: ${score}`;
+      answerInput.disabled = true;
+      answerInput.style.display = "none";
+      restartBtn.style.display = "inline-block";
+
+      if (score > highscore) {
+        highscore = score;
+        localStorage.setItem("mathHighscore", highscore);
+        highscoreDisplay.textContent = highscore;
+        question.textContent += " 🏆 New High Score!";
+      }
+    }
+
+    function checkAnswer() {
+      const userAns = parseInt(answerInput.value);
+      if (!isNaN(userAns) && userAns === correctAnswer) {
+        score++;
+        scoreDisplay.textContent = score;
+        generateQuestion();
+      } else {
+        generateQuestion();
+      }
+    }
+
+    answerInput.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !answerInput.disabled) {
+        checkAnswer();
+      }
+    });
+
+    startBtn.addEventListener("click", startGame);
+    restartBtn.addEventListener("click", startGame);
+  </script>
+</body>
+</html>
