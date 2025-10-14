@@ -70,9 +70,28 @@
     font-weight: bold;
     transition: width 0.3s;
   }
+  .funmathbutton {
+  position: fixed;
+  top: 20px;       
+  right: 40px;          
+  background: #00c6ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+.funmathbutton:hover {
+  background: #0072ff;
+}
 </style>
 </head>
 <body>
+  <div><button class="funmathbutton" onclick="window.location.href='Funmath.html'" alt="Funmath.html">💡Math fun</button></div>
 <div class="container" id="mainBox">
   <h1>🧠 DSA Quiz Tracker</h1>
 
@@ -87,12 +106,13 @@
     <button class="category-btn" onclick="startCategory('Dynamic Programming')">🧩 DP</button>
     <button class="category-btn" onclick="startCategory('Stack and Queue')">📦 Stack & Queue</button>
     <button class="category-btn" onclick="startCategory('Greedy Algorithms')">💰 Greedy Algorithm</button>
+    <button class="category-btn" onclick="startCategory('Scenario based')">🏞️Scenario based interview questions(3-6) lpa</button>
+    <button class="category-btn" onclick="startCategory('Scenario based medium')">🏞️Scenario based interview questions(9-18) lpa</button>
+    <button class="category-btn" onclick="startCategory('Scenario Based Hard')">🏞️Scenario based interview questions(above 18) lpa</button>
   </div>
 
   <div id="quiz" style="display:none;">
     <h3 id="category"></h3>
-
-    <!-- Per-question progress bar -->
     <div class="progress-container">
       <div class="progress-bar" id="questionProgress">0%</div>
     </div>
@@ -253,6 +273,56 @@ const questions = [
   {cat:"Greedy Algorithms",q:"Which of the following is true about greedy algorithms?",a:["They always guarantee the global optimum","They make locally optimal choices","They use recursion heavily","They require dynamic programming"],c:"They make locally optimal choices"},
   {cat:"Greedy Algorithms",q:"The greedy approach is most suitable when the problem has?",a:["Overlapping subproblems","Optimal substructure and greedy choice property","Backtracking property","Divide and Conquer property"],c:"Optimal substructure and greedy choice property"},
   {cat:"Greedy Algorithms",q:"Which of the following uses a greedy strategy for job scheduling?",a:["Job Sequencing with Deadlines","0/1 Knapsack","Matrix Chain Multiplication","Longest Common Subsequence"],c:"Job Sequencing with Deadlines"},
+  //Scenario based easy
+{cat:"Scenario based", q:"You are building an analytics dashboard and need to find the most viewed product from a list of daily views. Which DSA concept helps you find it efficiently?", a:["Sorting","Hash Map","Linked List","Stack"], c:"Hash Map"},
+{cat:"Scenario based", q:"In a chat app, you need to check if two usernames are anagrams before assigning personalized avatars. Which method would you use?", a:["Counting frequency of letters","Using substring search","Recursion","Binary search"], c:"Counting frequency of letters"},
+{cat:"Scenario based", q:"While validating nested tags in an HTML editor, which data structure helps check whether tags are properly closed?", a:["Queue","Stack","Linked List","Heap"], c:"Stack"},
+{cat:"Scenario based", q:"In an online ticket booking system, customers are served in the order they arrive. Which data structure models this best?", a:["Stack","Queue","Tree","Graph"], c:"Queue"},
+{cat:"Scenario based", q:"In a login system, you want to quickly verify if an entered email exists among millions of users. What structure helps fastest lookup?", a:["Array","Binary Tree","Hash Table","Stack"], c:"Hash Table"},
+{cat:"Scenario based", q:"While scheduling CPU tasks to minimize idle time, which algorithmic strategy can you use?", a:["Divide and Conquer","Dynamic Programming","Greedy Approach","Backtracking"], c:"Greedy Approach"},
+{cat:"Scenario based", q:"You are designing a GPS navigation feature to find the shortest route between cities. Which algorithm suits best?", a:["DFS","Kruskal's","Dijkstra's Algorithm","Prim's"], c:"Dijkstra's Algorithm"},
+{cat:"Scenario based", q:"To organize files and folders in a computer, which data structure resembles this hierarchy?", a:["Graph","Array","Tree","Stack"], c:"Tree"},
+{cat:"Scenario based", q:"A news feed shows top trending articles in real-time. Which structure efficiently keeps track of top k trending items?", a:["Stack","Queue","Min Heap","Hash Map"], c:"Min Heap"},
+{cat:"Scenario based", q:"In a payment app, you need to find the minimum number of coins to make a transaction value. Which technique fits best?", a:["Greedy","Dynamic Programming","Recursion","Brute Force"], c:"Dynamic Programming"},
+{cat:"Scenario based", q:"You are implementing an undo/redo feature in a text editor. Which data structure fits naturally for this?", a:["Stack","Linked List","Array","Queue"], c:"Linked List"},
+{cat:"Scenario based", q:"In a file explorer, you want to display all subfolders inside a directory. Which approach can help traverse nested folders?", a:["Recursion","Greedy","Backtracking","Queue"], c:"Recursion"},
+{cat:"Scenario based", q:"In an e-commerce app, you need to display products sorted by price. Which algorithm helps in arranging them efficiently?", a:["DFS","Merge Sort","BFS","Binary Search"], c:"Merge Sort"},
+{cat:"Scenario based", q:"While searching for a user's name in a sorted database, which algorithm gives the best performance?", a:["Linear Search","Binary Search","DFS","Recursion"], c:"Binary Search"},
+{cat:"Scenario based", q:"In a social network, you need to suggest friends of friends. Which algorithm can explore connections layer by layer?", a:["DFS","BFS","Prim’s","Kruskal’s"], c:"BFS"},
+//medium scenario based
+{cat:"Scenario based medium", q:"In a stock trading app, you need to find the maximum profit by buying and selling a stock once. Which approach is most efficient?", a:["Two pointers","Sorting","Hash Map","Brute Force"], c:"Two pointers"},
+{cat:"Scenario based medium", q:"In a plagiarism checker, you must find the longest common section between two essays. Which algorithm helps?", a:["KMP Algorithm","Rabin-Karp","Longest Common Subsequence","Trie"], c:"Longest Common Subsequence"},
+{cat:"Scenario based medium", q:"In a calculator app, how would you evaluate an expression like (2+3)*4 efficiently?", a:["Prefix and Postfix Evaluation","Hashing","Recursion","Dynamic Programming"], c:"Prefix and Postfix Evaluation"},
+{cat:"Scenario based medium", q:"In a printer queue system, you must handle tasks with priority. Which structure will you choose?", a:["Circular Queue","Priority Queue","Deque","Simple Queue"], c:"Priority Queue"},
+{cat:"Scenario based medium", q:"You want to detect duplicate images uploaded by users using hash values. Which concept fits best?", a:["Hash Map","Bloom Filter","Stack","Array"], c:"Bloom Filter"},
+{cat:"Scenario based medium", q:"To distribute minimum number of coins for a given amount using available denominations, which approach is best?", a:["Dynamic Programming","Greedy Algorithm","Divide and Conquer","Backtracking"], c:"Greedy Algorithm"},
+{cat:"Scenario based medium", q:"To detect whether a set of tasks with dependencies can all be completed, which algorithm helps?", a:["Topological Sort","Dijkstra’s Algorithm","BFS","DFS"], c:"Topological Sort"},
+{cat:"Scenario based medium", q:"In a database index system like B-Tree, why is balancing important?", a:["To reduce memory usage","To minimize search time","To increase branching","To avoid recursion"], c:"To minimize search time"},
+{cat:"Scenario based medium", q:"In a ride-sharing app, you need to quickly assign the nearest available driver to a rider. Which structure helps best?", a:["Binary Search Tree","Queue","Min Heap","Graph"], c:"Min Heap"},
+{cat:"Scenario based medium", q:"In a logistics company, you need to find the minimum cost path between two cities with tolls. Which algorithm helps?", a:["Dijkstra’s Algorithm","Floyd-Warshall Algorithm","Bellman-Ford","Dynamic Programming Grid Path"], c:"Dynamic Programming Grid Path"},
+{cat:"Scenario based medium", q:"In a music player app, the 'next' and 'previous' song navigation can be efficiently modeled using which type of linked list?", a:["Singly Linked List","Circular Linked List","Doubly Linked List","Skip List"], c:"Doubly Linked List"},
+{cat:"Scenario based medium", q:"To design a Sudoku solver for a puzzle game, which DSA technique fits best?", a:["Recursion","Backtracking","Dynamic Programming","Greedy"], c:"Backtracking"},
+{cat:"Scenario based medium", q:"To find whether two users in a social network are connected through any mutual friends, which traversal is efficient?", a:["DFS","BFS","Prim’s","Kruskal’s"], c:"BFS"},
+{cat:"Scenario based medium", q:"In a real-time analytics dashboard, you need to calculate the average website hits in the last 5 minutes continuously. Which concept fits best?", a:["Stack","Sliding Window","Dynamic Programming","Hash Map"], c:"Sliding Window"},
+{cat:"Scenario based medium", q:"You are implementing a search bar that gives instant suggestions as users type. Which data structure powers this efficiently?", a:["Hash Table","Trie","Heap","Graph"], c:"Trie"},
+//hard scenario
+{cat:"Scenario Based Hard", q:"You are designing a delivery system like Swiggy. To assign each delivery agent the nearest order efficiently, which algorithm would scale best for millions of requests?", a:["Dijkstra’s Algorithm","K-D Tree with Greedy Search","Brute Force Search","Binary Search"], c:"K-D Tree with Greedy Search"},
+{cat:"Scenario Based Hard", q:"In a stock prediction engine, you must calculate maximum profit from multiple transactions with cooldown days. Which approach fits best?", a:["Greedy","Dynamic Programming","Divide and Conquer","Stack"], c:"Dynamic Programming"},
+{cat:"Scenario Based Hard", q:"A social network suggests 'People You May Know' by mutual connections. Which algorithm provides efficient recommendations?", a:["DFS","BFS with Level Tracking","Union-Find + Graph Traversal","Topological Sort"], c:"Union-Find + Graph Traversal"},
+{cat:"Scenario Based Hard", q:"An e-commerce site must display top 10 most viewed products in real time. Which data structure ensures fast insertion and retrieval?", a:["Heap","BST","HashMap","Linked List"], c:"Heap"},
+{cat:"Scenario Based Hard", q:"You need to design a plagiarism detection tool comparing millions of documents. Which algorithmic concept will help optimize search?", a:["Suffix Tree","Hash Map","Dynamic Programming","Graph Search"], c:"Suffix Tree"},
+{cat:"Scenario Based Hard", q:"To detect network loops in a huge distributed system, which DSA concept would identify cycles efficiently?", a:["BFS","DFS Cycle Detection","Disjoint Set (Union-Find)","Bellman-Ford"], c:"Disjoint Set (Union-Find)"},
+{cat:"Scenario Based Hard", q:"A real-time gaming leaderboard updates player rankings every second. Which data structure allows efficient updates and rank queries?", a:["Segment Tree","Heap","Trie","AVL Tree"], c:"Segment Tree"},
+{cat:"Scenario Based Hard", q:"You are building an AI chat system that auto-completes words. For massive datasets, which structure scales better than Trie?", a:["Compressed Trie (Radix Tree)","Heap","Graph","Hash Map"], c:"Compressed Trie (Radix Tree)"},
+{cat:"Scenario Based Hard", q:"In a distributed caching system, how can you ensure minimal rehashing when servers are added or removed?", a:["Linear Hashing","Consistent Hashing","Quadratic Probing","Chaining"], c:"Consistent Hashing"},
+{cat:"Scenario Based Hard", q:"For a route optimization app like Google Maps, how can you find the shortest path when edge weights change dynamically?", a:["Dijkstra with Min-Heap","A* Algorithm","Bellman-Ford","Floyd-Warshall"], c:"A* Algorithm"},
+{cat:"Scenario Based Hard", q:"You are designing a spell checker that finds words with small edit distance differences. Which algorithm helps?", a:["Levenshtein Distance (DP)","KMP","Rabin-Karp","Trie Matching"], c:"Levenshtein Distance (DP)"},
+{cat:"Scenario Based Hard", q:"In a financial fraud detection system, you must detect unusual patterns across large datasets. Which structure fits?", a:["Graph + DFS Pattern Search","Segment Tree","Stack","Linked List"], c:"Graph + DFS Pattern Search"},
+{cat:"Scenario Based Hard", q:"In a ride-sharing app, to find all nearby drivers within 3km efficiently, which structure helps?", a:["Hash Map","K-D Tree (Spatial Indexing)","Heap","Segment Tree"], c:"K-D Tree (Spatial Indexing)"},
+{cat:"Scenario Based Hard", q:"You need to simulate thousands of concurrent users in an online multiplayer game where actions depend on priority. Which data structure can handle this efficiently?", a:["Priority Queue","Deque","Binary Search Tree","Graph"], c:"Priority Queue"},
+{cat:"Scenario Based Hard", q:"You are optimizing a compiler that must detect repeated code blocks efficiently. Which algorithmic concept best fits?", a:["Suffix Array + LCP","Dynamic Programming","Stack","BFS"], c:"Suffix Array + LCP"}
+
+
 ];
 
 let current=0, score=0, currentCat="", selectedQuestions=[];
