@@ -15,6 +15,7 @@
     height: 100vh;
   }
   .container {
+    position:relative;
     width: 90%;
     max-width: 600px;
     background: rgba(255,255,255,0.1);
@@ -23,7 +24,8 @@
     text-align: center;
     box-shadow: 0 0 25px rgba(0,0,0,0.4);
   }
-  h1 { color: #00ffcc; }
+  h1 { color: #00ffcc;
+    margin-top:80px;}
   .category-btn, .btn {
     background: #00ffcc;
     color: #000;
@@ -71,9 +73,9 @@
     transition: width 0.3s;
   }
   .funmathbutton {
-  position: fixed;
-  top: 20px;       
-  right: 40px;          
+   position: absolute;
+  top: 10px;
+  right: 10px;
   background: #00c6ff;
   color: white;
   border: none;
@@ -91,8 +93,9 @@
 </style>
 </head>
 <body>
-  <div><button class="funmathbutton" onclick="window.location.href='Funmath.html'" alt="Funmath.html">💡Math fun</button></div>
+ <div><button class="funmathbutton" onclick="window.location.href='Funmath.html'" alt="Funmath.html">💡Math fun</button></div>
 <div class="container" id="mainBox">
+     
   <h1>🧠 DSA Quiz Tracker</h1>
 
   <div id="home">
